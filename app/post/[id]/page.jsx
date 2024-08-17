@@ -11,11 +11,15 @@ import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import CommentSection from '@/components/CommentSection';
+import Image from 'next/image';
+import BlogPageSkeleton from '@/components/BlogPageSkeleton';
 
 const page = ({ params }) => {
   const { user } = useUser();
   const router = useRouter();
   const [blog, setBlog] = useState();
+  const [loading, setLoading] = useState(true);
+
   const [deleting, setDeleting] = useState(false);
 
   const getPost = async () => {
@@ -27,7 +31,10 @@ const page = ({ params }) => {
       setBlog(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
+
   };
   useEffect(() => {
     getPost();
@@ -48,6 +55,11 @@ const page = ({ params }) => {
       }
     }
   };
+  if (loading) {
+    return <div >
+      <BlogPageSkeleton/>
+    </div>;
+  }
   return (
     <BlurFade delay={0.25} inView>
     <div className='lg:mx-28 mx-4 my-10'>
@@ -92,7 +104,16 @@ const page = ({ params }) => {
           {blog?.title}
         </div>
         <div>
-          <img src={blog?.image} alt="" className=" rounded-2xl" />
+        <Image
+              src={blog?.image || '/default-image.png'}
+              alt={blog?.title || 'Blog image'}
+               placeholder="blur"
+                blurDataURL="/default-image.png"
+              className="rounded-2xl"
+              width={1200}  // Adjust these dimensions as needed
+              height={675}
+              layout="responsive"  // Use layout responsive for responsive images
+            />
         </div>
         <div
           className="text-gray-500 pt-4 text-justify"
