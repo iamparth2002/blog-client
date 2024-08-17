@@ -8,7 +8,9 @@ import { Button } from '@/components/ui/button';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
-import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
 const Page = () => {
