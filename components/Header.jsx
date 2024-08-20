@@ -7,10 +7,12 @@ import Link from 'next/link';
 
 const Header = () => {
   const { isSignedIn, user, isLoaded } = useUser();
+  console.log({user})
   return (
-    <nav className="py-4 max-md:px-4 flex items-center justify-between">
-      <Link href="/">
-        <Image src="/logo.svg" alt="Logo" width="200" height="200"></Image>
+    <nav className="py-4 max-lg:px-4 flex items-center justify-between">
+      <Link href="/" className='flex gap-2 items-center pl-4'>
+        <Image src="/bat.png" alt="Logo" width="45" height="45"></Image>
+        <h1 className='text-3xl font-extrabold bg-gradient-to-r from-violet-400 to-indigo-600 bg-clip-text text-transparent'>ECHO</h1>
       </Link>
 
       <div>

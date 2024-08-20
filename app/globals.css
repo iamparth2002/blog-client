@@ -13,6 +13,11 @@ body{
 html, body {
   height: 100%;
 }
+/* globals.css or a similar global CSS file */
+.hide-scrollbar {
+  @apply scrollbar-hide;
+}
+
 
 
 

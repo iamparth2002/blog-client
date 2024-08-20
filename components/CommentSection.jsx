@@ -3,11 +3,13 @@ import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { Loader2 } from 'lucide-react';
 
 const CommentSection = ({ postId }) => {
   const [blog,setBlog] = useState();
   const [commment, setComment] = useState('');
   const { user, isSignedIn, isLoaded } = useUser();
+  const [commenting,setCommenting] = useState(false)
   const getComments = async () => {
     try {
       const response = await axios.get(
@@ -21,6 +23,11 @@ const CommentSection = ({ postId }) => {
   };
   const createComment = async (e) => {
     e.preventDefault();
+    if(!isSignedIn) {
+      alert('Please login to comment')
+      return
+    }
+    setCommenting(true)
     const commentData = {
       content: commment,
       authorId: user.id,
@@ -44,6 +51,8 @@ const CommentSection = ({ postId }) => {
     } catch (error) {
       console.error('Error adding comment:', error);
       throw error; 
+    }finally{
+      setCommenting(false);
     }
   };
 
@@ -82,7 +91,7 @@ const CommentSection = ({ postId }) => {
             onClick={createComment}
             class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
           >
-            Post comment
+            {commenting ? <div className="flex gap-2">Commeting <Loader2 className="mr-2 h-4 w-4 animate-spin" /></div> :"Post Comment"}
           </button>
         </form>
         {
