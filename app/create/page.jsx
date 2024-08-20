@@ -95,7 +95,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 items-start p-4 md:mx-24 py-8">
+    <main className="flex flex-col gap-4 items-start p-4 md:mx-24 py-8">
       <h1 className="text-5xl font-semibold mb-2">Create Post</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
         <div className="grid max-w-sm items-center gap-1.5">
@@ -138,7 +138,7 @@ const Page = () => {
           {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Create Post'}
         </Button>
       </form>
-    </div>
+    </main>
   );
 };
 

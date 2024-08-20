@@ -144,7 +144,7 @@ const Page = ({ params }) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 items-start p-4 md:mx-24 py-8">
+    <main className="flex flex-col gap-4 items-start p-4 md:mx-24 py-8">
       <h1 className="text-5xl font-semibold mb-2">Edit Post</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -200,7 +200,7 @@ const Page = ({ params }) => {
           )}
         </Button>
       </form>
-    </div>
+    </main>
   );
 };
 
