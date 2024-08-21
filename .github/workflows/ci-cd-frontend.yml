@@ -1,14 +1,13 @@
-
 # .github/workflows/ci-cd-frontend.yml
 name: Frontend CI/CD
 
 on:
   push:
     branches:
-      - main # or your default branch
+      - main
   pull_request:
     branches:
-      - main # or your default branch
+      - main
 
 jobs:
   build:
@@ -21,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # or your Node.js version
+          node-version: '20' # Specify the Node.js version
 
       - name: Install dependencies
         run: npm install
