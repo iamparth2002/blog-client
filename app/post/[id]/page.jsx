@@ -30,6 +30,9 @@ const page = ({ params }) => {
       console.log(response);
       setBlog(response.data);
     } catch (error) {
+      if (error.response && error.response.status === 404) {
+        router.push('/not-found'); // Redirect to custom 404 page
+      }
       console.log(error);
     } finally {
       setLoading(false);

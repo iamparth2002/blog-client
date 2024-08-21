@@ -1,6 +1,8 @@
 import moment from 'moment';
 import Link from 'next/link';
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const BlogCard = ({ post }) => {
   function truncateText(text, maxWords) {
@@ -16,24 +18,41 @@ const BlogCard = ({ post }) => {
       {' '}
       {/* Set a fixed height here */}
       <Link href={`/post/${post?._id}`} className="block w-full h-full">
-        <div className='p-2 bg-white'>
-
-        <img
+        <div className="p-2 bg-white">
+          <img
           alt="blog photo"
           src={post?.image}
           className="object-cover w-full h-40 rounded-2xl"
+          loading='lazy'
         />
+
+          {/* <LazyLoadImage
+            alt="blog photo"
+            // height={"140px"}
+            effect="blur"
+            src={post.image} // use normal <img> attributes as props
+            // width={"140px"}
+
+            wrapperProps={{
+              
+              style: { transitionDelay: '0s' },
+            }}
+            placeholderSrc={post.image}
+            className="object-cover w-full h-40 rounded-2xl"
+          /> */}
         </div>
         <div className="w-full p-4 bg-white dark:bg-gray-800">
           <p className="mb-2  text-xl font-medium text-gray-800 dark:text-white line-clamp-2">
-          {/* {truncateText(post?.title, 10)} */}
-         { post?.title}
+            {/* {truncateText(post?.title, 10)} */}
+            {post?.title}
           </p>
           <p
-          className="font-light text-gray-400 dark:text-gray-300 text-sm line-clamp-3"
-          dangerouslySetInnerHTML={{ __html:truncateText(post?.content, 20)}}
-        />
-          
+            className="font-light text-gray-400 dark:text-gray-300 text-sm line-clamp-3"
+            dangerouslySetInnerHTML={{
+              __html: truncateText(post?.content, 20),
+            }}
+          />
+
           <div className="flex items-center mt-4">
             <div href="#" className="relative block">
               <img
@@ -43,7 +62,9 @@ const BlogCard = ({ post }) => {
               />
             </div>
             <div className="flex flex-col justify-between ml-4 text-sm">
-              <p className="text-gray-800 dark:text-white">{post?.author?.name}</p>
+              <p className="text-gray-800 dark:text-white">
+                {post?.author?.name}
+              </p>
               <p className="text-gray-400 dark:text-gray-300">
                 {moment(new Date(post?.createdAt)).format('LL')}
               </p>

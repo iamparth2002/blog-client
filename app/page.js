@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { blogPosts } from '@/lib/Data';
 import axios from 'axios';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -53,6 +54,7 @@ export default function Home() {
           Array.from({ length: 8 }).map((_, index) => (
             <BlogCardSkeleton key={index} />
           ))
+         
         ) : filteredPosts.length > 0 ? (
           filteredPosts.map((post, index) => (
             <BlurFade key={index} delay={0.25 + index * 0.05} inView>
