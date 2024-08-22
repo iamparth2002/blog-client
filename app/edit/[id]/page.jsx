@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -39,7 +39,12 @@ const Page = ({ params }) => {
       const response = await axios.get(
         process.env.NEXT_PUBLIC_BASE_URL + '/posts/' + params?.id
       );
-      console.log(response);
+
+      if(response.data.author.id !== user.id) {
+        router.push('/');
+        setLoading(false);
+        return;
+      }
       setBlog(response.data);
       // Set form values dynamically
       setValue('title', response.data.title);
@@ -53,8 +58,8 @@ const Page = ({ params }) => {
   };
 
   useEffect(() => {
-    getPost();
-  }, []);
+    user && getPost();
+  }, [user]);
 
   // Handle setting and validation of ReactQuill input
   const countWords = (text) => {
