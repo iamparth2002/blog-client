@@ -1,6 +1,6 @@
 # Echo - Blog Client
 
-![Echo Screenshot](path_to_screenshot)
+![Echo Screenshot](./assets/echo-blog-ss.png)
 
 ## Overview
 
@@ -38,5 +38,21 @@ Echo is a modern and sleek blog platform designed to provide a seamless reading 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/echo-client.git
+   git clone https://github.com/iamparth2002/echo-client.git
    cd echo-client
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   
+3. **Set Up Environment Variables**
+
+   ```bash
+     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-frontend-api>
+     CLERK_SECRET_KEY=<your-clerk-secret-key>
+     NEXT_PUBLIC_BASE_URL = <your-backend-api-url>
+   
+4. **Run the Development Server**
+
+   ```bash
+   npm run dev
